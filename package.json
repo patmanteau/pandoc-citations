@@ -1,0 +1,93 @@
+{
+    "name": "pandoc-citations",
+    "displayName": "Pandoc Citations",
+    "description": "Pandoc citation key autocompletion for VS Code",
+    "license": "MIT",
+    "version": "0.5.0",
+    "publisher": "patmanteau",
+    "homepage": "https://github.com/patmanteau/pandoc-citations",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/patmanteau/pandoc-citations.git"
+    },
+    "bugs": {
+        "url": "https://github.com/patmanteau/pandoc-citations/issues"
+    },
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:main.insertCitekey",
+        "onCommand:main.insertBracketedCitation",
+        "onLanguage:pfm",
+        "onLanguage:rmd",
+        "onLanguage:markdown"
+    ],
+    "main": "./out/main",
+    "contributes": {
+        "commands": [
+            {
+                "command": "main.insertCitekey",
+                "title": "Insert Citekey",
+                "category": "Pandoc Citations"
+            },
+            {
+                "command": "main.insertBracketedCitation",
+                "title": "Insert Bracketed Citation",
+                "category": "Pandoc Citations"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Pandoc Citations configuration",
+            "properties": {
+                "pandoc-citations.bibfiles": {
+                    "type": "array",
+                    "description": "A list of BibTeX files used as data sources.",
+                    "title": "List of BibTeX source files",
+                    "default": []
+                },
+                "pandoc-citations.placeholders.noAuthor": {
+                    "type": "string",
+                    "default": "n.a.",
+                    "title": "Placeholder in case bibliography entry has no author",
+                    "description": "In case a bibliography entry has no author, display this string instead."
+                },
+                "pandoc-citations.placeholders.noDate": {
+                    "type": "string",
+                    "default": "n.d.",
+                    "title": "Placeholder in case bibliography entry has no date",
+                    "description": "In case a bibliography entry has no date, display this string instead."
+                },
+                "pandoc-citations.debug": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Enable debug logging."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "@types/fs-extra": "^5.0.1",
+        "citation-js": "^0.4.0-1",
+        "fs-extra": "^5.0.0",
+        "moment": "^2.21.0",
+        "ts-md5": "^1.2.4"
+    }
+}
